@@ -25,6 +25,7 @@ import me.rcj0003.insaneenchants.commands.StressTestCommand;
 import me.rcj0003.insaneenchants.enchant.EnchantHandler;
 import me.rcj0003.insaneenchants.enchant.InsaneEnchant;
 import me.rcj0003.insaneenchants.itemdata.ItemDataFactory;
+import me.rcj0003.insaneenchants.listeners.InsaneComboEnchantListener;
 import me.rcj0003.insaneenchants.listeners.InsaneEnchantsEventListener;
 
 public class InsaneEnchantsPlugin extends JavaPlugin implements EnchantServicePlugin {
@@ -51,9 +52,7 @@ public class InsaneEnchantsPlugin extends JavaPlugin implements EnchantServicePl
 			servicePlugin = this;
 
 			commandProcessor = new InsaneEnchantsCommand();
-
 			enchantHandler = new EnchantHandler();
-			enchantDataFactory = new JsonItemDataFactory();
 
 			getCommand("insaneenchants").setExecutor(commandProcessor);
 
@@ -87,6 +86,9 @@ public class InsaneEnchantsPlugin extends JavaPlugin implements EnchantServicePl
 						return;
 					}
 
+					servicePlugin.getEnchantHandler().registerEnchant(enchants.toArray(new InsaneEnchant[0]));
+					enchantDataFactory = new JsonItemDataFactory(servicePlugin.getEnchantHandler());
+
 					commandProcessor.registerSubcommand(new HelpCommand("InsaneEnchants", commandProcessor),
 							new EnchantAddCommand(servicePlugin), new EnchantDebugCommand(servicePlugin),
 							new EnchantBookCommand(servicePlugin), new StressTestCommand(servicePlugin),
@@ -95,8 +97,9 @@ public class InsaneEnchantsPlugin extends JavaPlugin implements EnchantServicePl
 
 					Bukkit.getPluginManager().registerEvents(new InsaneEnchantsEventListener(servicePlugin),
 							InsaneEnchantsPlugin.getInstance());
-
-					servicePlugin.getEnchantHandler().registerEnchant(enchants.toArray(new InsaneEnchant[0]));
+					
+					Bukkit.getPluginManager().registerEvents(new InsaneComboEnchantListener(servicePlugin),
+							InsaneEnchantsPlugin.getInstance());
 
 					System.out.println("[InsaneEnchantsCore] Initialization sucessful! Enchant Service Plugin: "
 							+ servicePlugin.getName());

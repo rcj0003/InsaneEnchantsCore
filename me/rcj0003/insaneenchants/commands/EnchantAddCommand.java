@@ -3,6 +3,7 @@ package me.rcj0003.insaneenchants.commands;
 import org.bukkit.entity.Player;
 
 import me.rcj0003.insaneenchants.EnchantedItemData;
+import me.rcj0003.insaneenchants.UnregisteredEnchantedItemData;
 import me.rcj0003.insaneenchants.api.EnchantServicePlugin;
 import me.rcj0003.insaneenchants.enchant.EnchantHandler;
 import me.rcj0003.insaneenchants.enchant.InsaneEnchant;
@@ -64,7 +65,7 @@ public class EnchantAddCommand implements SubCommand {
 			return;
 		}
 		
-		EnchantedItemData data = EnchantedItemData.from(dataFactory.getItemData(player.getItemInHand()));
+		UnregisteredEnchantedItemData data = EnchantedItemData.from(dataFactory.getItemData(player.getItemInHand()), enchantHandler);
 		InsaneEnchant enchant = enchantHandler.getEnchantByDisplayName(arguments[0]);
 		
 		if (!enchant.isEnchantApplicable(player.getItemInHand())) {

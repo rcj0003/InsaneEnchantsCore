@@ -5,6 +5,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import me.rcj0003.insaneenchants.EnchantedItemData;
+import me.rcj0003.insaneenchants.UnregisteredEnchantedItemData;
 import me.rcj0003.insaneenchants.api.EnchantServicePlugin;
 import me.rcj0003.insaneenchants.enchant.EnchantHandler;
 import me.rcj0003.insaneenchants.enchant.InsaneEnchant;
@@ -63,7 +64,7 @@ public class EnchantBookCommand implements SubCommand {
 			ItemStack itemStack = new ItemBuilder(Material.BOOK, 1).setDisplayName("&6&nBook O' Enchantment")
 					.createItem();
 
-			EnchantedItemData data = EnchantedItemData.from(dataFactory.getItemData(player.getItemInHand()));
+			UnregisteredEnchantedItemData data = EnchantedItemData.from(dataFactory.getItemData(player.getItemInHand()), enchantHandler);
 			
 			if (data instanceof Loreable) {
 				Loreable loreable = (Loreable) data;

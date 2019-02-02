@@ -14,6 +14,7 @@ import me.rcj0003.insaneenchants.itemdata.ItemDataFactory;
 import me.rcj0003.insaneenchants.utilities.command.CommandUser;
 import me.rcj0003.insaneenchants.utilities.command.SubCommand;
 
+// Needs updated
 public class EnchantDebugCommand implements SubCommand {
 	private ItemDataFactory dataFactory;
 
@@ -21,42 +22,34 @@ public class EnchantDebugCommand implements SubCommand {
 		dataFactory = servicePlugin.getEnchantDataFactory();
 	}
 
-	@Override
 	public boolean getRequiresPlayer() {
 		return true;
 	}
 
-	@Override
 	public int getMinimumArguments() {
 		return 0;
 	}
 
-	@Override
 	public String getPermission() {
 		return "insaneenchants.admin.command.debug";
 	}
-
-	@Override
+	
 	public boolean hasPermission(CommandUser user) {
 		return user.getSender().isOp() || user.getSender().hasPermission(getPermission());
 	}
 
-	@Override
 	public String getName() {
 		return "enchantdebug";
 	}
 
-	@Override
 	public String[] getDescription() {
 		return new String[] { "Lists enchant data and debug information for enchant fetching." };
 	}
 
-	@Override
 	public String getUsage() {
 		return "N/A";
 	}
 
-	@Override
 	public void execute(CommandUser user, String[] arguments) {
 		Player player = user.getPlayer();
 		ItemData data = dataFactory.getItemData(player.getItemInHand());

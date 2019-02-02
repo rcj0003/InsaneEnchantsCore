@@ -4,6 +4,8 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
 import me.rcj0003.insaneenchants.EnchantedItemData;
+import me.rcj0003.insaneenchants.InsaneEnchantsPlugin;
+import me.rcj0003.insaneenchants.UnregisteredEnchantedItemData;
 import me.rcj0003.insaneenchants.api.EnchantServicePlugin;
 import me.rcj0003.insaneenchants.enchant.InsaneEnchant;
 import me.rcj0003.insaneenchants.utilities.ItemBuilder;
@@ -49,8 +51,9 @@ public class StressTestCommand implements SubCommand {
 	public void execute(CommandUser user, String[] arguments) {
 		ItemStack itemStack = new ItemBuilder(Material.BOOK, 1).setDisplayName("&6&nBook O' Enchantment").createItem();
 
-		EnchantedItemData enchantData = EnchantedItemData
-				.from(servicePlugin.getEnchantDataFactory().getItemData(itemStack));
+		UnregisteredEnchantedItemData enchantData = EnchantedItemData.from(
+				servicePlugin.getEnchantDataFactory().getItemData(itemStack),
+				InsaneEnchantsPlugin.getInstance().getEnchantHandler());
 
 		for (InsaneEnchant enchant : servicePlugin.getEnchantHandler().getRegisteredEnchants())
 			enchantData.addEnchant(enchant, enchant.getMaxLevel());
@@ -63,7 +66,8 @@ public class StressTestCommand implements SubCommand {
 		user.sendFormattedMessage("&8===[&6Stress Test #" + test + "&8]===", "");
 
 		while (System.currentTimeMillis() - startTime <= 100) {
-			enchantData = EnchantedItemData.from(servicePlugin.getEnchantDataFactory().getItemData(itemStack));
+			enchantData = EnchantedItemData.from(servicePlugin.getEnchantDataFactory().getItemData(itemStack),
+					InsaneEnchantsPlugin.getInstance().getEnchantHandler());
 			operations++;
 		}
 
@@ -85,7 +89,8 @@ public class StressTestCommand implements SubCommand {
 		operations = 0;
 
 		while (System.currentTimeMillis() - startTime <= 1000) {
-			enchantData = EnchantedItemData.from(servicePlugin.getEnchantDataFactory().getItemData(itemStack));
+			enchantData = EnchantedItemData.from(servicePlugin.getEnchantDataFactory().getItemData(itemStack),
+					InsaneEnchantsPlugin.getInstance().getEnchantHandler());
 
 			for (InsaneEnchant enchant : servicePlugin.getEnchantHandler().getRegisteredEnchants())
 				enchantData.addEnchant(enchant, enchant.getMaxLevel());

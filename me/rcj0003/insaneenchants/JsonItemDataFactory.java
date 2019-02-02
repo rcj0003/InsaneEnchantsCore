@@ -9,6 +9,7 @@ import org.bukkit.inventory.ItemStack;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import me.rcj0003.insaneenchants.enchant.EnchantHandler;
 import me.rcj0003.insaneenchants.enchant.InsaneEnchant;
 import me.rcj0003.insaneenchants.itemdata.ItemDataFactory;
 import me.rcj0003.insaneenchants.itemdata.ItemData;
@@ -19,15 +20,17 @@ import me.rcj0003.insaneenchants.utilities.RomanNumeralUtils;
 import me.rcj0003.insaneenchants.utilities.StringUtils;
 
 public class JsonItemDataFactory implements ItemDataFactory {
-	Gson builder;
+	private EnchantHandler enchantHandler;
+	private Gson builder;
 
-	public JsonItemDataFactory() {
+	public JsonItemDataFactory(EnchantHandler enchantHandler) {
+		this.enchantHandler = enchantHandler;
 		this.builder = new GsonBuilder().registerTypeHierarchyAdapter(ItemData.class, new JsonItemDataAdapter())
 				.create();
 	}
 
 	public void updateItem(ItemStack stack, ItemData itemData) {
-		EnchantedItemData enchantData = EnchantedItemData.from(itemData);
+		UnregisteredEnchantedItemData enchantData = EnchantedItemData.from(itemData, enchantHandler);
 		String gsonData = builder.toJson(itemData);
 		List<String> lore = new ArrayList<>();
 
@@ -57,8 +60,9 @@ public class JsonItemDataFactory implements ItemDataFactory {
 			JsonLoreParser loreData = new JsonLoreParser();
 			loreData.parseLore(stack.getItemMeta().getLore());
 
-			return loreData.hasNext() ? ((ReadItemData) builder.fromJson(loreData.next(), ItemData.class))
-					.get(InsaneEnchantsPlugin.getInstance().getEnchantHandler()) : new EmptyItemData();
+			return loreData.hasNext()
+					? EnchantedItemData.from(builder.fromJson(loreData.next(), ItemData.class), enchantHandler)
+					: new EmptyItemData();
 		}
 		return new EmptyItemData();
 	}

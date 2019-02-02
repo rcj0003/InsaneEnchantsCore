@@ -22,6 +22,8 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
 import me.rcj0003.insaneenchants.EnchantedItemData;
+import me.rcj0003.insaneenchants.InsaneEnchantsPlugin;
+import me.rcj0003.insaneenchants.UnregisteredEnchantedItemData;
 import me.rcj0003.insaneenchants.api.EnchantServicePlugin;
 import me.rcj0003.insaneenchants.enchant.InsaneDefensiveEnchant;
 import me.rcj0003.insaneenchants.enchant.InsaneEnchant;
@@ -42,8 +44,13 @@ public class InsaneEnchantsEventListener implements Listener {
 	}
 
 	private boolean combineItems(ItemStack stack1, ItemStack stack2) {
-		EnchantedItemData data1 = EnchantedItemData.from(servicePlugin.getEnchantDataFactory().getItemData(stack1));
-		EnchantedItemData data2 = EnchantedItemData.from(servicePlugin.getEnchantDataFactory().getItemData(stack2));
+		UnregisteredEnchantedItemData data1 = EnchantedItemData.from(
+				servicePlugin.getEnchantDataFactory().getItemData(stack1),
+				InsaneEnchantsPlugin.getInstance().getEnchantHandler());
+		
+		UnregisteredEnchantedItemData data2 = EnchantedItemData.from(
+				servicePlugin.getEnchantDataFactory().getItemData(stack2),
+				InsaneEnchantsPlugin.getInstance().getEnchantHandler());
 
 		boolean updateData = false;
 

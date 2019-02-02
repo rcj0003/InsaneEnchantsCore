@@ -15,24 +15,25 @@ public class UnregisteredEnchantedItemData implements ItemData, Enchantable, Lor
 	private Map<InsaneEnchant, Integer> enchantMap;
 	private List<String> lore;
 
-	public UnregisteredEnchantedItemData(Map<String, String> properties, Map<InsaneEnchant, Integer> enchantMap, List<String> lore) {
+	public UnregisteredEnchantedItemData(Map<String, String> properties, Map<InsaneEnchant, Integer> enchantMap,
+			List<String> lore) {
 		this.properties = properties;
 		this.enchantMap = enchantMap;
 		this.lore = lore;
 	}
-	
+
 	public void setProperty(String property, String value) {
 		properties.put(property, value);
 	}
-	
+
 	public void removeProperty(String property) {
 		properties.remove(property);
 	}
-	
+
 	public Map<String, String> getProperties() {
 		return Collections.unmodifiableMap(properties);
 	}
-	
+
 	public String getProperty(String property) {
 		return properties.get(property);
 	}
