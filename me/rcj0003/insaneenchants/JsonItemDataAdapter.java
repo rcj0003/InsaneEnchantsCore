@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.bukkit.ChatColor;
+
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonToken;
@@ -45,7 +47,7 @@ public class JsonItemDataAdapter extends TypeAdapter<ItemData> {
 					while (reader.hasNext())
 						lore.add(reader.nextString());
 
-					properties.put("lore", String.join(",", lore.toArray(new String[0])));
+					properties.put("lore", String.join(ChatColor.COLOR_CHAR + ",", lore.toArray(new String[0])));
 					reader.endArray();
 					break;
 				case "id":
@@ -75,6 +77,13 @@ public class JsonItemDataAdapter extends TypeAdapter<ItemData> {
 
 				for (Entry<InsaneEnchant, Integer> enchant : enchantData.getEnchants().entrySet())
 					writer.name(enchant.getKey().getInternalName()).value(enchant.getValue());
+				
+				Iterator<Entry<String, String>> propertyIterator = properties.entrySet().iterator();
+				while (propertyIterator.hasNext()) {
+					Entry<String, String> property = propertyIterator.next();
+					if (property.getKey().startsWith("enchant."))
+						propertyIterator.remove();
+				}
 
 				writer.endObject();
 			}
@@ -107,9 +116,9 @@ public class JsonItemDataAdapter extends TypeAdapter<ItemData> {
 			writer.endArray();
 		} else {
 			boolean beginWriteLore = false;
-			String loreData = data.getProperty("lore");
+			String loreData = properties.remove("lore");
 			if (loreData != null) {
-				for (String loreLine : loreData.split(","))
+				for (String loreLine : loreData.split(ChatColor.COLOR_CHAR + ","))
 					if (loreLine != null && !loreLine.isEmpty()) {
 						if (!beginWriteLore) {
 							beginWriteLore = true;

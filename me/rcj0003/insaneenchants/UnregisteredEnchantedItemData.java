@@ -35,7 +35,7 @@ public class UnregisteredEnchantedItemData implements ItemData, Enchantable, Lor
 	}
 
 	public String getProperty(String property) {
-		return properties.get(property);
+		return properties.getOrDefault(property, null);
 	}
 
 	public Map<InsaneEnchant, Integer> getEnchants() {

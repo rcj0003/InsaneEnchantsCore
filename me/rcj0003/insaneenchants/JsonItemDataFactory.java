@@ -13,7 +13,6 @@ import me.rcj0003.insaneenchants.enchant.EnchantHandler;
 import me.rcj0003.insaneenchants.enchant.InsaneEnchant;
 import me.rcj0003.insaneenchants.itemdata.ItemDataFactory;
 import me.rcj0003.insaneenchants.itemdata.ItemData;
-import me.rcj0003.insaneenchants.itemdata.Loreable;
 import me.rcj0003.insaneenchants.utilities.ItemBuilder;
 import me.rcj0003.insaneenchants.utilities.JsonLoreParser;
 import me.rcj0003.insaneenchants.utilities.RomanNumeralUtils;
@@ -41,12 +40,9 @@ public class JsonItemDataFactory implements ItemDataFactory {
 			lore.add("");
 		}
 
-		lore.add("&6&lLore:");
-		List<String> itemLore = ((Loreable) enchantData).getLore();
+		List<String> itemLore = enchantData.getLore();
 
-		if (itemLore.size() == 0)
-			lore.add("&7This item has no lore.");
-		else
+		if (itemLore.size() > 0)
 			lore.addAll(itemLore);
 
 		lore.add(StringUtils.createInvisibleString(JsonLoreParser.translateToSafeJson(gsonData)));

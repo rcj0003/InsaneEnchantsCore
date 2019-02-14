@@ -22,6 +22,6 @@ public class EmptyItemData implements ItemData {
 	}
 
 	public String getProperty(String property) {
-		return property;
+		return properties.get(property);
 	}
 }

@@ -8,6 +8,7 @@ import me.rcj0003.insaneenchants.itemdata.ItemDataFactory;
 public interface EnchantServicePlugin extends Plugin {
 	short getPluginPriority();
 	
+	@Deprecated
 	EnchantHandler getEnchantHandler();
 	ItemDataFactory getEnchantDataFactory();
 }

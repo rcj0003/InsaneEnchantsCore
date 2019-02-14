@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.bukkit.ChatColor;
+
 import me.rcj0003.insaneenchants.enchant.EnchantHandler;
 import me.rcj0003.insaneenchants.enchant.InsaneEnchant;
 import me.rcj0003.insaneenchants.itemdata.Enchantable;
@@ -45,7 +47,7 @@ public class EnchantedItemData extends UnregisteredEnchantedItemData implements 
 			lore = new ArrayList<>(((Loreable) itemData).getLore());
 		else {
 			String loreData = itemProperties.remove("lore");
-			lore = loreData == null ? new ArrayList<>() : new ArrayList<>(Arrays.asList(loreData.split(",")));
+			lore = loreData == null ? new ArrayList<>() : new ArrayList<>(Arrays.asList(loreData.split(ChatColor.COLOR_CHAR + ",")));
 		}
 
 		itemId = itemData instanceof Identifiable ? ((Identifiable) itemData).getID() : itemProperties.remove("id");
