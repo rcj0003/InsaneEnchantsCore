@@ -10,5 +10,6 @@ public interface EnchantServicePlugin extends Plugin {
 	
 	@Deprecated
 	EnchantHandler getEnchantHandler();
+	
 	ItemDataFactory getEnchantDataFactory();
 }

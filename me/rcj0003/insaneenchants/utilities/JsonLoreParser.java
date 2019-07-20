@@ -6,6 +6,7 @@ import java.util.List;
 
 import net.md_5.bungee.api.ChatColor;
 
+@Deprecated
 public class JsonLoreParser {
 	private List<String> jsonData = new ArrayList<String>();
 	

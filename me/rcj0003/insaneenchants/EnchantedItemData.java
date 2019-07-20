@@ -18,6 +18,7 @@ import me.rcj0003.insaneenchants.itemdata.ItemData;
 import me.rcj0003.insaneenchants.itemdata.Loreable;
 import me.rcj0003.insaneenchants.utilities.StringUtils;
 
+@Deprecated
 public class EnchantedItemData extends UnregisteredEnchantedItemData implements Identifiable {
 	private String itemId;
 

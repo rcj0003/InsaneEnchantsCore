@@ -10,6 +10,7 @@ import me.rcj0003.insaneenchants.itemdata.Enchantable;
 import me.rcj0003.insaneenchants.itemdata.ItemData;
 import me.rcj0003.insaneenchants.itemdata.Loreable;
 
+@Deprecated
 public class UnregisteredEnchantedItemData implements ItemData, Enchantable, Loreable {
 	private Map<String, String> properties;
 	private Map<InsaneEnchant, Integer> enchantMap;

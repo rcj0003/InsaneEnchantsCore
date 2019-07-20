@@ -18,6 +18,7 @@ import me.rcj0003.insaneenchants.utilities.JsonLoreParser;
 import me.rcj0003.insaneenchants.utilities.RomanNumeralUtils;
 import me.rcj0003.insaneenchants.utilities.StringUtils;
 
+@Deprecated
 public class JsonItemDataFactory implements ItemDataFactory {
 	private EnchantHandler enchantHandler;
 	private Gson builder;

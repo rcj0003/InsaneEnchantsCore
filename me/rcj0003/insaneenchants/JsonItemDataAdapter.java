@@ -21,6 +21,7 @@ import me.rcj0003.insaneenchants.itemdata.Identifiable;
 import me.rcj0003.insaneenchants.itemdata.ItemData;
 import me.rcj0003.insaneenchants.itemdata.Loreable;
 
+@Deprecated
 public class JsonItemDataAdapter extends TypeAdapter<ItemData> {
 	public ReadItemData read(JsonReader reader) throws IOException {
 		Map<String, String> properties = new HashMap<>();

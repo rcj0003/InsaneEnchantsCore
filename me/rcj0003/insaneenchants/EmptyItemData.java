@@ -6,6 +6,7 @@ import java.util.Map;
 
 import me.rcj0003.insaneenchants.itemdata.ItemData;
 
+@Deprecated
 public class EmptyItemData implements ItemData {
 	private Map<String, String> properties = new HashMap<>();
 	

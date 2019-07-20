@@ -6,6 +6,7 @@ import java.util.Map;
 
 import me.rcj0003.insaneenchants.enchant.InsaneEnchant;
 
+@Deprecated
 public class UnmodifiableEnchantItemData extends UnregisteredEnchantedItemData {
 	public UnmodifiableEnchantItemData(Map<String, String> properties, Map<InsaneEnchant, Integer> enchantMap, String itemId, List<String> lore) {
 		super(properties, enchantMap, lore);

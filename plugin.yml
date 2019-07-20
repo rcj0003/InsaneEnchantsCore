@@ -1,6 +1,6 @@
 main: me.rcj0003.insaneenchants.InsaneEnchantsPlugin
 name: InsaneEnchantsCore
-version: 2.1.0-alpha
+version: 2.2.0
 author: rcj0003
 description: Not just custom enchants... Insane enchants!
 commands:
